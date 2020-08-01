@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch,Route } from 'react-router-dom';
 import LayoutCpn from '@components/layout';
+import Login from './pages/login'
 const subMenuList = [
   {
     subMenuKey: 'home1',
@@ -34,18 +35,26 @@ const subMenuList = [
 function App() {
   const content = (
     <Switch>
-      <Route path='/home/item1' component={() => <h1>/home/item1</h1>}></Route>
-      <Route path='/home/item2' component={() => <h1>/home/item2</h1>}></Route>
+      <Route path='/home/item1' component={() => <h1>/home/item1</h1>} />
+      <Route path='/home/item2' component={() => <h1>/home/item2</h1>} />
     </Switch>
   )
   return (
     <div className="App">
-      <LayoutCpn 
-        subMenuList={subMenuList}
-        breadcrumbList={['home','list']}
-        content={content}
-      >
-      </LayoutCpn>
+      <Switch>
+        <Route path='/' exact render={props => {
+          return (
+            <LayoutCpn 
+              subMenuList={subMenuList}
+              breadcrumbList={['home','list']}
+              content={content}
+            >
+            </LayoutCpn>
+          )
+        }}/>
+        <Route path='/login' component={Login} />
+      </Switch>
+      
     </div>
   );
 }

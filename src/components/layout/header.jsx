@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import { Layout,Menu, Dropdown, } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+const { Header } = Layout;
 const menu = (
     <Menu>
         <Menu.Item>
@@ -11,7 +12,6 @@ const menu = (
         </Menu.Item>
     </Menu>
 )
-const { Header } = Layout;
 const iconStyle = { fontSize: '15px', color: '#fff',marginLeft: '10px' };
 const HeaderCpn = () => {
     const [ isLogin ] = useState(false);
@@ -24,8 +24,8 @@ const HeaderCpn = () => {
             )
         }
         return (<span style={iconStyle}>
-            <NavLink to='/login' style={{color: '#fff'}}>登录</NavLink>
-        </span>)
+                    <NavLink to='/login' style={{color: '#fff'}}>登录</NavLink>
+                </span>)
     }
     return (
         <Header className="header">
