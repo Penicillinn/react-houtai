@@ -1,19 +1,20 @@
 import React from 'react';
 import { Switch,Route } from 'react-router-dom';
 import LayoutCpn from '@components/layout';
-import Login from './pages/login'
+import Login from './pages/login';
+import User from './pages/user'
 const subMenuList = [
   {
-    subMenuKey: 'home1',
-    subMenuTitle: 'home',
+    subMenuKey: 'user',
+    subMenuTitle: '用户',
     menuItenList: [
       {
-        key: '/home/item1',
-        content: 'list1'
+        key: '/userlist',
+        content: '用户列表'
       },
       {
-        key: '/home/item2',
-        content: 'list2'
+        key: '/userpower',
+        content: '用户权限'
       },
     ]
   },
@@ -35,18 +36,18 @@ const subMenuList = [
 function App() {
   const content = (
     <Switch>
-      <Route path='/home/item1' component={() => <h1>/home/item1</h1>} />
+      <Route path='/user/:type' component={User} />
       <Route path='/home/item2' component={() => <h1>/home/item2</h1>} />
+      {/* <Redirect from='/' to='/user' /> */}
     </Switch>
   )
   return (
     <div className="App">
       <Switch>
-        <Route path='/' exact render={props => {
+        <Route path='/' render={props => {
           return (
             <LayoutCpn 
               subMenuList={subMenuList}
-              breadcrumbList={['home','list']}
               content={content}
             >
             </LayoutCpn>

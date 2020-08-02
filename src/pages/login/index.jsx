@@ -1,5 +1,7 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Form, Input, Button } from 'antd';
+import { checkLogin } from '@service/login';
+import { setStorage } from '../../utils'
 
 const layout = {
     labelCol: { span: 4 },
@@ -8,11 +10,24 @@ const layout = {
   const tailLayout = {
     wrapperCol: { offset: 4, span: 20 },
   };
+  
 const Login = (props) => {
-    const onFinish = values => {
-        console.log('Success:', values);
+    //获取登录之前的路径
+    const getOldPathname = () => {
+        const searchStr = props.history.location.search;
+        if(!searchStr) {
+            return '/'
+        }
+        return searchStr.substr(1).split('=')[1];
+    }
+    const [ oldPath ] = useState(getOldPathname());
+    const onFinish = async values => {
+        const { data } = await checkLogin(values);
+        if(data.status === 0) {
+            setStorage('userinfo',data.data)
+            props.history.push(oldPath)
+        }
     };
-    
     return (
         <div style={{width: '400px',height: '300px',margin: '200px auto'}}>
             <Form

@@ -2,24 +2,41 @@ import React,{ useState } from 'react';
 import { Layout,Menu, Dropdown, } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import { getStorage,removeStorage } from '../../utils';
+import { logOut } from '@service/login'
 const { Header } = Layout;
 const menu = (
-    <Menu>
+    <Menu
+        onClick={e => hadleLogOut()}
+    >
         <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-            退出登录
-        </a>
+                <span>退出登录</span>
         </Menu.Item>
     </Menu>
 )
+const hadleLogOut = async() => {
+    await logOut();
+    removeStorage('userinfo');
+    window.location.href = '/login';
+}
 const iconStyle = { fontSize: '15px', color: '#fff',marginLeft: '10px' };
 const HeaderCpn = () => {
-    const [ isLogin ] = useState(false);
+    const checkIsLogin = () => {
+        const result = getStorage('userinfo');
+        if(!result) {
+            return false;
+        }
+        return true;
+    }
+    const getUserName = () => {
+        return getStorage('userinfo') ? getStorage('userinfo').username : '';
+    }
+    const [ isLogin ] = useState(checkIsLogin());
     const renderByIsLogin = () => {
         if(isLogin) {
             return (
                 <Dropdown overlay={menu} placement="bottomLeft">
-                    <span style={iconStyle}>hello</span>
+                    <span style={iconStyle}>{ getUserName() }</span>
                 </Dropdown>
             )
         }

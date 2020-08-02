@@ -300,7 +300,8 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
         '@': path.resolve(__dirname, '../src'),
         '@page': path.resolve(__dirname, '../src/pages'),
-        '@components': path.resolve(__dirname, '../src/components')
+        '@components': path.resolve(__dirname, '../src/components'),
+        '@service': path.resolve(__dirname, '../src/service')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -667,6 +668,6 @@ module.exports = function(webpackEnv) {
     },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
-    performance: false,
+    performance: false
   };
 };
