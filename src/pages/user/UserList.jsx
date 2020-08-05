@@ -70,6 +70,7 @@ class UserList extends PureComponent {
                         total: this.state.total,
                         onChange: (pageNum,pageSize) => this.handleChangePage(pageNum,pageSize) 
                     }}
+                    rowKey={(record,index) => index}
                  />
             </div>
         )

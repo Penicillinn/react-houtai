@@ -33,7 +33,6 @@ const Login = (props) => {
             <Form
                 {...layout}
                 name="basic"
-                initialValues={{ remember: true }}
                 onFinish={onFinish}
             >
                 <Form.Item

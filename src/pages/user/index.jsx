@@ -13,7 +13,7 @@ const User = (props) => {
             )
         }
     }
-    showCpnByType()
+    // showCpnByType()
     return (
         <div>
             {showCpnByType()}
